@@ -1,0 +1,35 @@
+1) Add ALPS using eric files, similar to Dark photons, only difference is file_rate, can use DP_Libraries and rename it DP_ALP_Libraries.py
+chack that rate scales with gAe*gAe and check in setting limits that not only for DP but also for ALP it scales 
+2) Add DM-electron scattering, modify Ulitmate_libraries such that we have SetMultiLine (list of lines and rates, rate globaly scalable) , we'll take the middle of each bin in DM-electron histo as input
+
+j'ai retrouvé ~/Desktop/PhysicalReviewLetters/SEPTEMBER/makeDarkMatterSpectra.C qui produit les fichiers root qui contiennents les histos que j'utilisais
+
+ca utilise : /home/arnaud/Desktop/PhysicalReviewLetters/SEPTEMBER/pre-factors-for-dm-masses-rho03.dat
+pour les masses : /home/arnaud/Desktop/PhysicalReviewLetters/SEPTEMBER/September-dm-masses-in-eV.txt
+
+
+9 rows of 3+500 values: binned recoil spectra in energy bins (500 0.1eV-bins from 0.0 to 50.0eV)
+The first column stands for the DM-formfaktor (1,2,3: F_DM=1, =1/q, =1/q^2)
+The second column represents the month and so annual modulation of the velocity of the earth (1: December ve_mod=-15kmps, 2: March ve_mod=0, 3: June ve_mod=15kmps)
+The third column is the total rate (arbitrary units!), the following bins represent the binned rate, i.e. 500 0.1eV bins (again, arbitrary units!)
+normalisation factor for rates to correspond to events/kg/year for a cross section of sigma=1e-37 cm2 is 778429.68 (preliminary!!!) 
+
+For example, for a standard halo velocity and a form factor F_DM=1/q^2, one has to select the combination "3 2" which is the 6th row in the data files.
+01 	01
+02	01
+03	01
+01	02	F=1 no modulation
+02	02
+03	02	F=1/q2 no modulation
+01	03
+02	03
+03	03
+
+
+
+3) Finish different background types o Background_Libraries (add 10 keV, based on SetMultiLine from 2)   . Decide if rates should always be given in dru (per keV) disentangle EnergyScale and RateScale. But weird to have /kg/day/keV vs eV ....... 
+
+4) sigma² = sigma² + F Q(Er) Er / 3 + (1%Er)²    mettre le sigma dans l'integration du coup car il dépende de Er
+pour les bornes d'intégration, il va falloir ruser en faisant d'abord Er_from_Eph puis determiner sigma(Er) pour le +- 5 sig
+
+
